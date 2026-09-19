@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muqaddas — Biotechnologist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400;1,72,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:      #F1F2EC;
+    --paper-raise:#E8E9E0;
+    --ink:        #1E2A22;
+    --ink-soft:    #495449;
+    --rule:       #CFCEC0;
+    --accent:     #2F6F62;
+    --accent-soft:#DCE7E0;
+    --amber:      #B06B2E;
+    --amber-soft: #EEE0CE;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:      #141C17;
+      --paper-raise:#1B251E;
+      --ink:        #E9EBE1;
+      --ink-soft:   #A9B3A5;
+      --rule:       #33402F;
+      --accent:     #6FCBAA;
+      --accent-soft:#213127;
+      --amber:      #E3A360;
+      --amber-soft: #2C2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:      #141C17;
+    --paper-raise:#1B251E;
+    --ink:        #E9EBE1;
+    --ink-soft:   #A9B3A5;
+    --rule:       #33402F;
+    --accent:     #6FCBAA;
+    --accent-soft:#213127;
+    --amber:      #E3A360;
+    --amber-soft: #2C2318;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft);}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    border-bottom:1px solid var(--rule);
+    padding:1.4rem 1.75rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:0.5rem 1.5rem;
+  }
+  .masthead-title{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:1.05rem;
+    letter-spacing:0.06em;
+    font-weight:500;
+  }
+  .masthead-meta{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- Layout ---------- */
+  .page{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:0;
+  }
+  @media (max-width:820px){
+    .page{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    border-right:1px solid var(--rule);
+    padding:2.4rem 1.75rem 3rem;
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+  }
+  @media (max-width:820px){
+    .sidebar{position:static; height:auto; border-right:none; border-bottom:1px solid var(--rule); padding:2rem 1.5rem;}
+  }
+  .author-name{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:2.1rem;
+    font-weight:600;
+    line-height:1.15;
+    margin:0 0 0.35rem;
+  }
+  .author-role{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    margin:0 0 1.6rem;
+  }
+  .sidebar-contact{
+    font-size:0.85rem;
+    margin-bottom:2.2rem;
+    color:var(--ink-soft);
+  }
+  .sidebar-contact div{margin-bottom:0.35rem;}
+  .sidebar-contact a{color:var(--ink-soft); border-bottom:1px solid var(--rule);}
+  .sidebar-contact a:hover{color:var(--accent); border-bottom-color:var(--accent);}
+
+  .toc-label{
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    margin-bottom:0.7rem;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .toc{list-style:none; margin:0 0 2rem; padding:0;}
+  .toc li{margin-bottom:0.55rem;}
+  .toc a{
+    display:flex;
+    gap:0.6rem;
+    color:var(--ink);
+    border-bottom:none;
+    font-size:0.9rem;
+  }
+  .toc a:hover{color:var(--accent);}
+  .toc .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--amber);
+    flex-shrink:0;
+    padding-top:0.1rem;
+  }
+
+  .helix{display:block; margin-top:1rem; opacity:0.85;}
+
+  /* ---------- Main content ---------- */
+  main{padding:2.4rem 2.4rem 5rem;}
+  @media (max-width:820px){main{padding:2rem 1.5rem 4rem;}}
+  @media (max-width:480px){main{padding:1.5rem 1.1rem 3rem;}}
+
+  .strand{max-width:640px;}
+
+  section{
+    padding-top:2.6rem;
+    margin-bottom:0.4rem;
+    border-top:1px solid var(--rule);
+  }
+  section:first-of-type{border-top:none; padding-top:0;}
+
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.85rem;
+    margin-bottom:1.1rem;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:0.85rem;
+  }
+  h2{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0;
+  }
+
+  p{margin:0 0 1rem;}
+  .lede{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:1.18rem;
+    font-style:italic;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin-bottom:1.4rem;
+  }
+
+  .keywords{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.5rem;
+    margin-bottom:1.8rem;
+  }
+  .keywords span{
+    font-size:0.76rem;
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:0.25rem 0.6rem;
+    border-radius:2px;
+  }
+
+  /* Education */
+  .degree-block{
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-bottom:0.3rem;
+  }
+  .degree-name{font-weight:600;}
+  .degree-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .institution{color:var(--ink-soft); font-size:0.92rem; margin-bottom:0.7rem;}
+  .cgpa{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--amber);
+    margin-bottom:0.9rem;
+  }
+  .course-list{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+
+  /* Timeline (Results) */
+  .timeline{
+    position:relative;
+    padding-left:1.5rem;
+    border-left:1px solid var(--rule);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:1.9rem;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-1.56rem;
+    top:0.35rem;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .tl-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--amber);
+    display:block;
+    margin-bottom:0.25rem;
+  }
+  .tl-role{font-weight:600; margin-bottom:0.1rem;}
+  .tl-org{color:var(--ink-soft); font-size:0.9rem; margin-bottom:0.5rem;}
+  .tl-desc{font-size:0.92rem; color:var(--ink-soft); margin:0;}
+  .tl-desc ul{margin:0.4rem 0 0; padding-left:1.1rem;}
+  .tl-desc li{margin-bottom:0.25rem;}
+
+  /* Publication / conference cards */
+  .cite-block{
+    border-left:2px solid var(--accent);
+    padding:0.2rem 0 0.2rem 1.1rem;
+    margin-bottom:1.6rem;
+  }
+  .cite-title{font-weight:600; font-family:'Newsreader', Georgia, serif; font-size:1.08rem; margin-bottom:0.3rem;}
+  .cite-meta{font-size:0.85rem; color:var(--ink-soft);}
+
+  /* Skills / methods */
+  .methods-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.8rem;
+  }
+  @media (max-width:600px){.methods-grid{grid-template-columns:1fr;}}
+  .method-cat h3{
+    font-family:'Newsreader', Georgia, serif;
+    font-size:1rem;
+    font-weight:600;
+    margin:0 0 0.6rem;
+  }
+  .method-cat ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .method-cat li{
+    padding:0.4rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .method-cat li:first-child{border-top:none;}
+
+  /* References */
+  .ref-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+  @media (max-width:600px){.ref-grid{grid-template-columns:1fr;}}
+  .ref-card{
+    background:var(--paper-raise);
+    border:1px solid var(--rule);
+    padding:1.1rem 1.2rem;
+  }
+  .ref-name{font-weight:600; margin-bottom:0.2rem;}
+  .ref-title{font-size:0.86rem; color:var(--ink-soft);}
+
+  /* Correspondence / footer */
+  .correspondence{
+    background:var(--paper-raise);
+    border:1px solid var(--rule);
+    padding:1.6rem 1.8rem;
+    margin-top:1rem;
+  }
+  .corr-row{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    padding:0.55rem 0;
+    border-top:1px solid var(--rule);
+    font-size:0.92rem;
+  }
+  .corr-row:first-child{border-top:none;}
+  .corr-label{color:var(--ink-soft);}
+
+  footer{
+    text-align:center;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    padding:2.5rem 1.5rem 3rem;
+  }
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{scroll-behavior:auto !important;}
+  }
+
+  html{scroll-behavior:smooth;}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-title">Annals of a Biotechnologist</div>
+  <div class="masthead-meta">Vol. 1, No. 2026 · Manuscript BIOTECH-2026-0142</div>
+</div>
+
+<div class="page">
+
+  <aside class="sidebar">
+    <h1 class="author-name">Muqaddas</h1>
+    <p class="author-role">Biotechnologist — Molecular Biology &amp; Genetics</p>
+
+    <div class="sidebar-contact">
+      <div><a href="mailto:malikmuqaddas06795@gmail.com">malikmuqaddas06795@gmail.com</a></div>
+      <div><a href="tel:+923138790882">+92 313 8790882</a></div>
+      <div>Islamabad / Mandi Bahauddin, Pakistan</div>
+    </div>
+
+    <div class="toc-label">Contents</div>
+    <ul class="toc">
+      <li><a href="#abstract"><span class="num">01</span> Abstract</a></li>
+      <li><a href="#education"><span class="num">02</span> Education</a></li>
+      <li><a href="#results"><span class="num">03</span> Results &amp; Experience</a></li>
+      <li><a href="#publication"><span class="num">04</span> Publication</a></li>
+      <li><a href="#conferences"><span class="num">05</span> Conferences</a></li>
+      <li><a href="#methods"><span class="num">06</span> Materials &amp; Methods</a></li>
+      <li><a href="#references"><span class="num">07</span> References</a></li>
+      <li><a href="#correspondence"><span class="num">08</span> Correspondence</a></li>
+    </ul>
+
+    <svg class="helix" viewBox="0 0 200 260" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 10 C 60 50, 60 90, 20 130 C -20 170, -20 210, 20 250" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.55" transform="translate(60,0)"/>
+      <path d="M180 10 C 140 50, 140 90, 180 130 C 220 170, 220 210, 180 250" fill="none" stroke="var(--amber)" stroke-width="2" opacity="0.55" transform="translate(-80,0)"/>
+      <g stroke="var(--rule)" stroke-width="1.4">
+        <line x1="35" y1="20" x2="145" y2="20"/>
+        <line x1="45" y1="55" x2="135" y2="55"/>
+        <line x1="35" y1="90" x2="145" y2="90"/>
+        <line x1="35" y1="130" x2="145" y2="130"/>
+        <line x1="45" y1="165" x2="135" y2="165"/>
+        <line x1="35" y1="200" x2="145" y2="200"/>
+        <line x1="35" y1="240" x2="145" y2="240"/>
+      </g>
+    </svg>
+  </aside>
+
+  <main>
+
+    <section id="abstract">
+      <div class="sec-head"><span class="sec-num">01</span><h2>Abstract</h2></div>
+      <p class="lede">A biotechnology graduate whose curiosity runs from the bench to the sequence file — equally at home running a gel as reading one.</p>
+      <p>Muqaddas holds a Bachelor of Science in Biotechnology from the Virtual University of Pakistan and has spent the past two years moving between diagnostic laboratories and hospital settings across Punjab and Islamabad, building fluency in molecular biology techniques, clinical diagnostics, and laboratory quality control. Her research interests center on CRISPR-Cas9 genome editing, molecular biotechnology and genetics, and bioinformatics — an interest reflected in a co-authored review on nanotechnology's role in molecular biology and biomedical engineering. She communicates in English, Urdu, and Punjabi.</p>
+      <div class="keywords">
+        <span>CRISPR-Cas9</span>
+        <span>Molecular Genetics</span>
+        <span>Bioinformatics</span>
+        <span>PCR</span>
+        <span>Diagnostics</span>
+        <span>Nanobiotechnology</span>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-head"><span class="sec-num">02</span><h2>Education</h2></div>
+      <div class="degree-block">
+        <span class="degree-name">Bachelor of Science in Biotechnology</span>
+        <span class="degree-date">Apr 2023 – Dec 2025</span>
+      </div>
+      <div class="institution">Virtual University of Pakistan</div>
+      <span class="cgpa">CGPA 2.68 / 4.00</span>
+      <div class="course-list">Major coursework: Molecular Biology, Virology, Industrial Biotechnology, Immunology, Nanobiotechnology, Bioinformatics.</div>
+    </section>
+
+    <section id="results">
+      <div class="sec-head"><span class="sec-num">03</span><h2>Results &amp; Experience</h2></div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <span class="tl-date">Feb – Aug 2025</span>
+          <div class="tl-role">Medical Laboratory Technologist</div>
+          <div class="tl-org">Makhdom Diagnostic Center, Mandi Bahauddin</div>
+          <div class="tl-desc">
+            <ul>
+              <li>Performed routine diagnostic testing across microbiology, hematology, and clinical biochemistry</li>
+              <li>Prepared slides and stained specimens for microscopy-based identification</li>
+              <li>Operated centrifuge, incubator, and spectrophotometer equipment</li>
+              <li>Maintained SOPs, quality control, and accurate patient reporting</li>
+              <li>Handled sample collection and labeling under strict biosafety protocols</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <span class="tl-date">Nov 2025 – Mar 2026</span>
+          <div class="tl-role">Medical Laboratory Technologist</div>
+          <div class="tl-org">Ahtizaz Pathology Laboratory, Mandi Bahauddin</div>
+          <div class="tl-desc">Applied hands-on expertise in diagnostic testing, quality control, and laboratory safety procedures.</div>
+        </div>
+
+        <div class="tl-item">
+          <span class="tl-date">Apr – May 2026</span>
+          <div class="tl-role">Biotechnologist</div>
+          <div class="tl-org">Pakistan Institute of Medical Sciences (PIMS), Islamabad</div>
+          <div class="tl-desc">Gained hands-on laboratory expertise in diagnostic testing, quality control, and laboratory safety procedures.</div>
+        </div>
+
+        <div class="tl-item">
+          <span class="tl-date">May 2026 – Present</span>
+          <div class="tl-role">Ambassador, Biotech Squad</div>
+          <div class="tl-org">Student ambassador program</div>
+          <div class="tl-desc">Contributing to scientific outreach, biotechnology awareness, and community engagement activities.</div>
+        </div>
+
+        <div class="tl-item">
+          <span class="tl-date">Aug 2026</span>
+          <div class="tl-role">Observership</div>
+          <div class="tl-org">Shifa International Hospital, Islamabad</div>
+          <div class="tl-desc">Completed a clinical laboratory observership with exposure to hospital laboratory workflows, hands-on molecular biology work, and immunology procedures.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="publication">
+      <div class="sec-head"><span class="sec-num">04</span><h2>Publication</h2></div>
+      <div class="cite-block">
+        <div class="cite-title">Nanotechnology at the Molecular Frontier: Transformative Applications, Therapeutic Innovations, and Future Directions in Molecular Biology and Biomedical Engineering</div>
+        <div class="cite-meta">Annual Methodological Archive Research Review · December 2025</div>
+      </div>
+    </section>
+
+    <section id="conferences">
+      <div class="sec-head"><span class="sec-num">05</span><h2>Conferences &amp; Workshops</h2></div>
+      <div class="cite-block">
+        <div class="cite-title">2nd International Symposium on Genetic Diseases — "Rare Genetic Disorders: Challenges and Innovations"</div>
+        <div class="cite-meta">Shaheed Zulfiqar Ali Bhutto Medical University (SZABMU), Islamabad · June 2026</div>
+      </div>
+    </section>
+
+    <section id="methods">
+      <div class="sec-head"><span class="sec-num">06</span><h2>Materials &amp; Methods</h2></div>
+      <div class="methods-grid">
+        <div class="method-cat">
+          <h3>Laboratory Techniques</h3>
+          <ul>
+            <li>DNA Extraction</li>
+            <li>Polymerase Chain Reaction (PCR)</li>
+            <li>Agarose Gel Electrophoresis</li>
+            <li>Nanodrop Quantification</li>
+            <li>Dilution Preparation</li>
+            <li>Plant Tissue Culture</li>
+          </ul>
+        </div>
+        <div class="method-cat">
+          <h3>Bioinformatics</h3>
+          <ul>
+            <li>NCBI Databases</li>
+            <li>BLAST Sequence Alignment</li>
+            <li>Sequence Retrieval &amp; Analysis</li>
+          </ul>
+        </div>
+        <div class="method-cat">
+          <h3>Software</h3>
+          <ul>
+            <li>Excel — formulas, pivot tables, charts, optimization</li>
+            <li>Word — reports, contracts, formatting</li>
+            <li>PowerPoint — presentation design</li>
+          </ul>
+        </div>
+        <div class="method-cat">
+          <h3>Languages</h3>
+          <ul>
+            <li>English — Proficient</li>
+            <li>Urdu — Native</li>
+            <li>Punjabi — Native</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="references">
+      <div class="sec-head"><span class="sec-num">07</span><h2>References</h2></div>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <div class="ref-name">Rehmat Ullah</div>
+          <div class="ref-title">Instructor, Department of Biological Sciences<br>Virtual University of Pakistan</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Dr. Zunaira Sher</div>
+          <div class="ref-title">Lecturer, Department of Biological Sciences<br>Virtual University of Pakistan</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="correspondence">
+      <div class="sec-head"><span class="sec-num">08</span><h2>Correspondence</h2></div>
+      <p>For collaboration, research opportunities, or laboratory roles, reach Muqaddas directly:</p>
+      <div class="correspondence">
+        <div class="corr-row"><span class="corr-label">Email</span><a href="mailto:malikmuqaddas06795@gmail.com">malikmuqaddas06795@gmail.com</a></div>
+        <div class="corr-row"><span class="corr-label">Phone</span><a href="tel:+923138790882">+92 313 8790882</a></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>End of manuscript — thank you for reading</footer>
+
+</body>
+</html>
